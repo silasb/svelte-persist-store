@@ -13,7 +13,7 @@ const makeValue = (value, compress) => {
 const getValue = (key, mode, compress) => {
     let storage = mode.slice(0, 1) === "l" ? localStorage : sessionStorage;
     let value = storage.getItem(makeName(key, compress));
-    if (!value) return false;
+    if (!value || value == "undefined") return false;
     if (compress) value = lzString.decompressFromUTF16(value);
     return JSON.parse(value);
 };
